@@ -1,0 +1,32 @@
+[
+  {
+    "id": "q1",
+    "question": "Explain the concept of least squares estimation in linear regression.",
+    "answer": "Least squares estimation chooses parameter values that minimise the sum of squared residuals between observed responses and the model's predicted values. By taking derivatives of the residual sum of squares with respect to each coefficient and solving the normal equations, the method finds the unique set of coefficients that produce the smallest possible squared error for a linear model with full rank design matrix.",
+    "citations": ["Montgomery, Peck & Vining (2021) - Introduction to Linear Regression Analysis"]
+  },
+  {
+    "id": "q2",
+    "question": "What does a coefficient represent in a multiple linear regression model?",
+    "answer": "In a multiple linear regression, each coefficient represents the expected change in the dependent variable for a one-unit increase in the associated predictor while holding all other predictors constant. The sign of the coefficient encodes the direction of association, and its magnitude indicates the strength of that marginal effect within the range of the data.",
+    "citations": ["Kutner et al. (2004) - Applied Linear Statistical Models"]
+  },
+  {
+    "id": "q3",
+    "question": "List the classical assumptions behind the Ordinary Least Squares (OLS) linear regression model.",
+    "answer": "Key OLS assumptions include linearity in parameters, independent observations, homoscedastic errors with constant variance, zero-mean errors, no perfect multicollinearity among predictors, and normally distributed errors for inference. Violations of these assumptions can bias estimates, inflate variance, or invalidate hypothesis tests.",
+    "citations": ["Wooldridge (2020) - Introductory Econometrics"]
+  },
+  {
+    "id": "q4",
+    "question": "How is the coefficient of determination (R-squared) interpreted?",
+    "answer": "R-squared measures the proportion of variability in the dependent variable that is explained by the fitted regression model. It is computed as one minus the ratio of residual sum of squares to total sum of squares. Higher values indicate that the model captures a greater share of the outcome variance, but R-squared alone does not assess causality or guarantee that the model is appropriate.",
+    "citations": ["Freedman (2009) - Statistical Models"]
+  },
+  {
+    "id": "q5",
+    "question": "How can an analyst detect multicollinearity in a regression model?",
+    "answer": "Analysts diagnose multicollinearity using metrics such as variance inflation factors (VIFs), condition indices, or by inspecting near-linear dependence in the design matrix. Large VIF values or high condition numbers suggest predictors are linearly dependent, which can destabilise coefficient estimates and inflate standard errors.",
+    "citations": ["Belsley, Kuh & Welsch (1980) - Regression Diagnostics"]
+  }
+]
