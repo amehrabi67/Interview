@@ -1,0 +1,145 @@
+[
+  {
+    "id": "q1",
+    "question": "Explain the concept of least squares estimation in linear regression.",
+    "answer": "Least squares estimation finds coefficients by minimizing the sum of squared residuals between observed responses and the model's fitted values. It leads to closed-form normal equations and an optimal unbiased estimator under the Gauss-Markov assumptions.",
+    "citations": [
+      "Montgomery, D. C., Peck, E. A., & Vining, G. G. (2012). Introduction to Linear Regression Analysis.",
+      "Seber, G. A., & Lee, A. J. (2012). Linear Regression Analysis."
+    ],
+    "key_points": [
+      "Minimize sum of squared residuals",
+      "Derive normal equations",
+      "Gauss-Markov optimality"
+    ]
+  },
+  {
+    "id": "q2",
+    "question": "What does the coefficient in a linear regression model represent?",
+    "answer": "In a linear regression model, a coefficient quantifies the expected change in the response variable for a one-unit increase in the associated predictor while holding other predictors constant. It reflects partial effect and directionality.",
+    "citations": [
+      "Wooldridge, J. M. (2013). Introductory Econometrics: A Modern Approach.",
+      "Kutner, M. H., Nachtsheim, C. J., & Neter, J. (2004). Applied Linear Regression Models."
+    ],
+    "key_points": [
+      "Marginal effect",
+      "Holds other predictors fixed",
+      "Direction and magnitude"
+    ]
+  },
+  {
+    "id": "q3",
+    "question": "Define the Gauss-Markov assumptions necessary for the ordinary least squares estimator to be BLUE.",
+    "answer": "The Gauss-Markov assumptions include linearity in parameters, random sampling, full column rank (no perfect multicollinearity), zero conditional mean of errors, and homoscedasticity. Under these assumptions the OLS estimator is the Best Linear Unbiased Estimator (BLUE).",
+    "citations": [
+      "Hayashi, F. (2000). Econometrics.",
+      "Greene, W. H. (2018). Econometric Analysis."
+    ],
+    "key_points": [
+      "Linearity",
+      "Random sampling",
+      "No perfect multicollinearity",
+      "Zero conditional mean",
+      "Homoscedasticity"
+    ]
+  },
+  {
+    "id": "q4",
+    "question": "How do you interpret the R-squared metric in linear regression?",
+    "answer": "R-squared measures the proportion of variance in the dependent variable explained by the regressors. It is calculated as one minus the ratio of the residual sum of squares to the total sum of squares. Higher values indicate better fit but do not imply causality or guarantee predictive performance.",
+    "citations": [
+      "James, G., Witten, D., Hastie, T., & Tibshirani, R. (2013). An Introduction to Statistical Learning.",
+      "Kutner, M. H., Nachtsheim, C. J., & Neter, J. (2004). Applied Linear Regression Models."
+    ],
+    "key_points": [
+      "Variance explained",
+      "1 - RSS/TSS",
+      "Does not imply causality"
+    ]
+  },
+  {
+    "id": "q5",
+    "question": "What is multicollinearity and how can it affect a linear regression model?",
+    "answer": "Multicollinearity occurs when predictors are highly linearly correlated, leading to unstable coefficient estimates, inflated standard errors, and difficulty interpreting individual effects. Diagnostics include variance inflation factors and condition indices. Mitigation strategies involve removing variables, combining them, or using regularization.",
+    "citations": [
+      "Belsley, D. A., Kuh, E., & Welsch, R. E. (2005). Regression Diagnostics.",
+      "Montgomery, D. C., Peck, E. A., & Vining, G. G. (2012). Introduction to Linear Regression Analysis."
+    ],
+    "key_points": [
+      "High predictor correlation",
+      "Inflated standard errors",
+      "Diagnostics and remedies"
+    ]
+  },
+  {
+    "id": "q6",
+    "question": "Describe how to perform residual analysis to validate a linear regression model.",
+    "answer": "Residual analysis involves examining plots of residuals versus fitted values for patterns, assessing normality with Q-Q plots, checking for heteroscedasticity, and identifying influential points using leverage and Cook's distance. The goal is to confirm model assumptions and highlight needed adjustments.",
+    "citations": [
+      "Montgomery, D. C., Peck, E. A., & Vining, G. G. (2012). Introduction to Linear Regression Analysis.",
+      "Fox, J. (2016). Applied Regression Analysis and Generalized Linear Models."
+    ],
+    "key_points": [
+      "Residual vs fitted plots",
+      "Normality diagnostics",
+      "Influence measures"
+    ]
+  },
+  {
+    "id": "q7",
+    "question": "Explain the difference between bias and variance in the context of linear regression.",
+    "answer": "Bias measures the error introduced by approximating a complex relationship with a simpler model, whereas variance reflects how much the estimator would change with different samples. A good model balances bias and variance to minimize expected prediction error.",
+    "citations": [
+      "Hastie, T., Tibshirani, R., & Friedman, J. (2009). The Elements of Statistical Learning.",
+      "James, G., Witten, D., Hastie, T., & Tibshirani, R. (2013). An Introduction to Statistical Learning."
+    ],
+    "key_points": [
+      "Bias definition",
+      "Variance definition",
+      "Trade-off"
+    ]
+  },
+  {
+    "id": "q8",
+    "question": "How does regularization (Ridge or Lasso) modify the linear regression objective?",
+    "answer": "Regularization adds a penalty to the least squares objective: Ridge includes an L2 penalty on coefficients, while Lasso uses an L1 penalty that can drive coefficients to zero. These penalties reduce overfitting and handle multicollinearity by shrinking coefficient magnitudes.",
+    "citations": [
+      "Hastie, T., Tibshirani, R., & Friedman, J. (2009). The Elements of Statistical Learning.",
+      "James, G., Witten, D., Hastie, T., & Tibshirani, R. (2013). An Introduction to Statistical Learning."
+    ],
+    "key_points": [
+      "Add penalty to loss",
+      "Ridge L2 shrinkage",
+      "Lasso L1 sparsity"
+    ]
+  },
+  {
+    "id": "q9",
+    "question": "What assumptions must hold for hypothesis tests on regression coefficients to be valid?",
+    "answer": "Hypothesis tests on coefficients require that errors are normally distributed with constant variance and zero mean, observations are independent, and the model is correctly specified. These ensure the t-statistics follow their reference distribution for inference.",
+    "citations": [
+      "Wooldridge, J. M. (2013). Introductory Econometrics: A Modern Approach.",
+      "Greene, W. H. (2018). Econometric Analysis."
+    ],
+    "key_points": [
+      "Normality",
+      "Independence",
+      "Homoscedasticity",
+      "Correct specification"
+    ]
+  },
+  {
+    "id": "q10",
+    "question": "Describe how cross-validation can be used to assess a linear regression model.",
+    "answer": "Cross-validation partitions the data into folds, fits the model on training folds, and evaluates predictive performance on held-out folds. Averaging the error across folds estimates generalization error and aids model selection, such as choosing regularization strength.",
+    "citations": [
+      "James, G., Witten, D., Hastie, T., & Tibshirani, R. (2013). An Introduction to Statistical Learning.",
+      "Hastie, T., Tibshirani, R., & Friedman, J. (2009). The Elements of Statistical Learning."
+    ],
+    "key_points": [
+      "Partition data into folds",
+      "Train/validate cycle",
+      "Estimate generalization error"
+    ]
+  }
+]

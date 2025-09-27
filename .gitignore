@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.env
+.venv/
+*.sqlite3
+storage/vector_store/
+celerybeat-schedule
+*.log
