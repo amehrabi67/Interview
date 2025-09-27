@@ -6,7 +6,7 @@ from typing import Optional
 from celery import Celery
 
 from app.config import get_settings
-from app.dependencies import get_pipeline
+from app.dependencies import get_pipeline, get_session_store_singleton
 
 settings = get_settings()
 
@@ -24,6 +24,8 @@ def process_submission_task(
     video_path: Optional[str] = None,
     transcript: Optional[str] = None,
 ) -> bool:
+    # Ensure the worker initialises the same session backend as the API process.
+    get_session_store_singleton()
     pipeline = get_pipeline()
     pipeline.process(
         session_id=session_id,

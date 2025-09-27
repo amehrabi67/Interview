@@ -12,13 +12,25 @@ from app.services.pipeline import AssessmentPipeline
 from app.services.question_service import QuestionService
 from app.services.rag import RAGEvaluator
 from app.services.report import ReportBuilder
-from app.services.session import SessionStore
+from redis import Redis
+from redis.exceptions import RedisError
+
+from app.services.session import RedisSessionStore, SessionStore
 from app.services.transcription import TranscriptionService
 from app.services.visual import LlavaVisionLanguageModel, NullVisionLanguageModel, VisualAnalyzer
 
 
 @lru_cache(maxsize=1)
 def get_session_store_singleton() -> SessionStore:
+    settings = get_settings()
+    if settings.use_celery or settings.session_store_url:
+        redis_url = settings.session_store_url or settings.celery_result_backend or settings.celery_broker_url
+        try:
+            client = Redis.from_url(redis_url, decode_responses=True)
+            client.ping()
+            return RedisSessionStore(client)
+        except (RedisError, OSError) as exc:
+            print(f"Failed to initialise Redis session store at {redis_url}: {exc}. Falling back to in-memory store.")
     return SessionStore()
 
 

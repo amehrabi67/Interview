@@ -45,6 +45,7 @@ class Settings(BaseSettings):
     celery_broker_url: str = "redis://localhost:6379/0"
     celery_result_backend: str = "redis://localhost:6379/1"
     use_celery: bool = False
+    session_store_url: Optional[str] = None
 
     model_config = SettingsConfigDict(env_prefix="INTERVIEW_", env_file=".env", env_file_encoding="utf-8")
 

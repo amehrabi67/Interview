@@ -105,6 +105,7 @@ All settings may be overridden via environment variables (prefix `INTERVIEW_`). 
 | `INTERVIEW_CELERY_BROKER_URL` | `redis://localhost:6379/0` | Celery broker |
 | `INTERVIEW_CELERY_RESULT_BACKEND` | `redis://localhost:6379/1` | Celery results backend |
 | `INTERVIEW_USE_CELERY` | `False` | Dispatch processing jobs to Celery instead of FastAPI background tasks |
+| `INTERVIEW_SESSION_STORE_URL` | `None` (falls back to `INTERVIEW_CELERY_RESULT_BACKEND`) | Redis connection string for the shared session store |
 
 ## Extending the System
 
@@ -115,3 +116,46 @@ All settings may be overridden via environment variables (prefix `INTERVIEW_`). 
 ## Testing Notes
 
 Due to the heavy multimedia dependencies, unit tests are not bundled with this prototype. When integrating into CI, prefer mocking the Whisper, LLM, and MediaPipe layers to avoid large downloads while still exercising the orchestration code paths.
+
+### Celery regression checklist
+
+To validate the shared session store across the API and worker processes:
+
+1. Ensure a Redis instance is reachable (for example `docker run --rm -p 6379:6379 redis:7`).
+2. In one terminal start the API with Celery enabled so it uses the Redis-backed session store:
+
+   ```bash
+   INTERVIEW_USE_CELERY=true \
+   INTERVIEW_SESSION_STORE_URL=redis://localhost:6379/2 \
+   uvicorn app.main:app --reload
+   ```
+
+3. In a second terminal start the Celery worker:
+
+   ```bash
+   INTERVIEW_USE_CELERY=true \
+   INTERVIEW_SESSION_STORE_URL=redis://localhost:6379/2 \
+   celery -A celery_app.celery_app worker --loglevel=info
+   ```
+
+4. Kick off a new exam session and capture the `session_id` (requires `jq`):
+
+   ```bash
+   SESSION_ID=$(curl -s localhost:8000/exam/start | jq -r '.session_id')
+   ```
+
+5. Submit a transcript-only response which will be processed by the Celery worker:
+
+   ```bash
+   curl -s -X POST "localhost:8000/exam/submit-transcript" \
+        -H "Content-Type: application/json" \
+        -d "{\"session_id\": \"$SESSION_ID\", \"transcript\": \"The slope measures change in Y per unit change in X.\"}"
+   ```
+
+6. Poll the status endpoint until `status` reports `completed` and the report payload is returned:
+
+   ```bash
+   watch -n 2 curl -s localhost:8000/exam/$SESSION_ID
+   ```
+
+This flow verifies the API and Celery worker coordinate via the Redis-backed session store and that submissions progress to a completed state.
