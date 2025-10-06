@@ -1,0 +1,9 @@
+{"type":"session_start","mode":"dl","recording":false,"timestamp":1718653200.125,"iso_time":"2024-06-17T09:00:00"}
+{"type":"recording","recording":true,"timestamp":1718653205.240,"iso_time":"2024-06-17T09:00:05"}
+{"type":"pen_down","timestamp":1718653206.011,"iso_time":"2024-06-17T09:00:06"}
+{"type":"stroke_end","shape":"circle","timestamp":1718653210.542,"iso_time":"2024-06-17T09:00:10"}
+{"type":"stroke_end","shape":"square","timestamp":1718653215.334,"iso_time":"2024-06-17T09:00:15"}
+{"type":"gesture","gesture":"erase","timestamp":1718653218.902,"iso_time":"2024-06-17T09:00:18"}
+{"type":"recording","recording":false,"timestamp":1718653222.110,"iso_time":"2024-06-17T09:00:22"}
+{"type":"face_mode","mode":"pip","timestamp":1718653223.455,"iso_time":"2024-06-17T09:00:23"}
+{"type":"session_end","timestamp":1718653225.670,"iso_time":"2024-06-17T09:00:25"}
