@@ -115,3 +115,54 @@ All settings may be overridden via environment variables (prefix `INTERVIEW_`). 
 ## Testing Notes
 
 Due to the heavy multimedia dependencies, unit tests are not bundled with this prototype. When integrating into CI, prefer mocking the Whisper, LLM, and MediaPipe layers to avoid large downloads while still exercising the orchestration code paths.
+
+## Air Interaction Demo Tool
+
+`air_interact.py` is a standalone real-time "air-interaction" capture utility that accompanies the oral exam platform. It tracks the user's index fingertip, segments pen-up/pen-down strokes, recognises air-drawn shapes and dynamic gestures, and streams JSON events for downstream processing.
+
+### Installation
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+pip install opencv-python mediapipe numpy
+```
+
+### Runtime Modes
+
+| Mode | Description |
+| --- | --- |
+| `--mode dl` | MediaPipe Hands for landmark detection with pinch-based pen gating. |
+| `--mode cv` | OpenCV-only pipeline using motion/contour analysis (no neural nets). |
+
+### Launch
+
+```bash
+python air_interact.py --mode dl --camera 0 --record-start off --face box --log-file session_log.jsonl
+```
+
+The OpenCV window is titled **Air Interaction**. Ensure the window has focus so hotkeys are received.
+
+### Hotkeys
+
+| Key | Action |
+| --- | --- |
+| `R` | Toggle recording (REC: ON/OFF). |
+| `F` | Cycle face overlay (off → box → picture-in-picture). |
+| `C` | Clear the on-screen canvas and stroke buffer. |
+| `T` | Save the last stroke as a new $1 template to refine symbol recognition. |
+| `ESC` | Quit. |
+
+### Recognised Acts
+
+| Category | Labels / Gestures |
+| --- | --- |
+| Shapes | line, circle, square, rectangle, triangle, check ✓, cross X, plus +, minus −, arrow →, zigzag, dot |
+| Fingers | Numbers 0–10 (detected from one or two hands depending on the mode) |
+| Dynamic | pinch (pen-down), unpinch (pen-up), erase swipe |
+
+### JSON Event Stream
+
+Events are emitted to `stdout` and optionally to `--log-file` as JSON lines with both epoch and ISO-8601 timestamps. Examples include `session_start`, `recording`, `pen_down`, `stroke_end`, `gesture`, and `template_saved`.
+
